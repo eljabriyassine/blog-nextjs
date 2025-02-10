@@ -104,7 +104,7 @@ export default function RegisterForm() {
       );
 
       if (response.ok) {
-        router.push("/login");
+        router.push("/auth");
       } else {
         const data = await response.json();
         setGeneralError(

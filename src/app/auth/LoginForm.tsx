@@ -29,7 +29,7 @@ export default function LoginForm() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.access_token);
-        router.push("/dashboard");
+        router.push("/");
       } else {
         setError("Invalid email or password");
       }
