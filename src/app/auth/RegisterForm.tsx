@@ -89,19 +89,16 @@ export default function RegisterForm() {
     }
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/register`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: userInputs.name.value,
-            username: userInputs.username.value,
-            email: userInputs.email.value,
-            password: userInputs.password.value,
-          }),
-        }
-      );
+      const response = await fetch(`${process.env.BACKEND_API_URL}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: userInputs.name.value,
+          username: userInputs.username.value,
+          email: userInputs.email.value,
+          password: userInputs.password.value,
+        }),
+      });
 
       if (response.ok) {
         router.push("/auth");
