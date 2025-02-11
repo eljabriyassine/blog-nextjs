@@ -9,10 +9,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import { useState } from "react";
 
 export default function AuthPage() {
-  const [step, setStep] = useState("login");
   return (
     <div className="container mx-auto flex items-center justify-center min-h-screen">
       <Card className="w-[400px]">
@@ -21,7 +19,7 @@ export default function AuthPage() {
           <CardDescription>Login or create a new account</CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue={step}>
+          <Tabs defaultValue="login">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="login">Login</TabsTrigger>
               <TabsTrigger value="register">Register</TabsTrigger>

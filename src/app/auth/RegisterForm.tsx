@@ -111,7 +111,7 @@ export default function RegisterForm() {
           data.message || "Registration failed. Please try again."
         );
       }
-    } catch (err) {
+    } catch {
       setGeneralError("An error occurred. Please try again.");
     }
   };
