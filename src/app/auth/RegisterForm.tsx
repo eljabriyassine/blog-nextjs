@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -19,7 +18,11 @@ interface UserInputs {
   confirmPassword: UserInput;
 }
 
-export default function RegisterForm() {
+interface RegisterFormProps {
+  onRegisterSuccess: () => void;
+}
+
+export default function RegisterForm({ onRegisterSuccess }: RegisterFormProps) {
   const [userInputs, setUserInputs] = useState<UserInputs>({
     name: { value: "", error: "" },
     username: { value: "", error: "" },
@@ -28,7 +31,6 @@ export default function RegisterForm() {
     confirmPassword: { value: "", error: "" },
   });
   const [generalError, setGeneralError] = useState("");
-  const router = useRouter();
 
   const validateField = (field: keyof UserInputs, value: string): string => {
     switch (field) {
@@ -101,7 +103,7 @@ export default function RegisterForm() {
       });
 
       if (response.ok) {
-        router.push("/auth");
+        onRegisterSuccess(); // Switch to login tab
       } else {
         const data = await response.json();
         setGeneralError(
