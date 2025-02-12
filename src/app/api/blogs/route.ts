@@ -1,29 +1,15 @@
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
-  const { title, description, content } = await request.json();
-  const authheader = request.headers.get("authorization");
-
-  if (!authheader) {
-    return NextResponse.json(
-      { error: "Unauthorized: No token provided" },
-      { status: 401 }
-    );
-  }
-
+export async function GET() {
   try {
     const response = await fetch(`${process.env.BACKEND_API_URL}/posts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: authheader,
-      },
-      body: JSON.stringify({ title, description, content }),
+      method: "GET",
     });
 
     const data = await response.json();
 
     if (!response.ok) {
+      console.log("Response Error: ", data);
       return NextResponse.json(data, { status: response.status });
     }
 

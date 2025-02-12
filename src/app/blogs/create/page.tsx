@@ -23,7 +23,7 @@ export default function CreateBlogPost() {
           "Content-Type": "application/json",
           authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-        body: JSON.stringify({ title, description: content }),
+        body: JSON.stringify({ title, description, content }),
       });
 
       if (resposne.ok) {

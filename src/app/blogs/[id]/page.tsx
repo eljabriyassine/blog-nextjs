@@ -9,16 +9,29 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { blogPosts } from "@/lib/data";
+type Blog = {
+  id: number;
+  title: string;
+  description: string;
+  createdAt: string;
+  imgUrl: string;
+};
 
-export default function BlogPost({ params }: { params: { id: string } }) {
-  const post = blogPosts.find((p) => p.id === params.id);
-
-  if (!post) {
-    notFound();
+export default async function BlogPost({ params }: { params: { id: string } }) {
+  const res = await fetch(`${process.env.BACKEND_API_URL}/posts/${params.id}`);
+  if (!res.ok) {
+    return notFound();
   }
 
-  const relatedPosts = blogPosts.filter((p) => p.id !== post.id).slice(0, 3);
+  const resposne = await fetch(`${process.env.BACKEND_API_URL}/posts`);
+  const blogPosts: Blog[] = await resposne.json();
+
+  //make three blog in relatedPosts
+  const relatedPosts = blogPosts.slice(0, 3);
+
+  //take just thre blog from resopse
+
+  const post = await res.json();
 
   return (
     <article className="max-w-3xl mx-auto">
@@ -62,7 +75,7 @@ export default function BlogPost({ params }: { params: { id: string } }) {
                   className="rounded-t-lg object-cover h-32"
                 />
               </CardHeader>
-              <CardContent>
+              {/* <CardContent>
                 <CardTitle className="mb-2">{relatedPost.title}</CardTitle>
                 <p className="text-sm text-muted-foreground">
                   {new Date(relatedPost.publishedAt).toLocaleDateString()}
@@ -72,7 +85,7 @@ export default function BlogPost({ params }: { params: { id: string } }) {
                 <Button asChild variant="outline" className="w-full">
                   <Link href={`/blog/${relatedPost.id}`}>Read More</Link>
                 </Button>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           ))}
         </div>
