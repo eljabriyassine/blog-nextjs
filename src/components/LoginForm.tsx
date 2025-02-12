@@ -31,7 +31,7 @@ export function LoginForm() {
         const data = await response.json();
         setError(data.error || "Invalid email or password");
       }
-    } catch (error) {
+    } catch {
       setError("An error occurred. Please try again.");
     }
   };

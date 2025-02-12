@@ -1,10 +1,7 @@
-import exp from "constants";
-import { stat } from "fs";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const { name, username, email, password, confirmPassword } =
-    await request.json();
+  const { name, username, email, password } = await request.json();
 
   try {
     const response = await fetch(

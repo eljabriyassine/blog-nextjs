@@ -35,7 +35,7 @@ export default function LoginForm() {
       }
     } catch (error: any) {
       console.error("Error logging in:", error);
-      setError(error.message || "An error occurred. Please try again.");
+      setError(error?.message || "An error occurred. Please try again.");
     }
   };
 
