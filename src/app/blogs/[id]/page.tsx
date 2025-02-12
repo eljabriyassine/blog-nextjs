@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/card";
 import { blogPosts } from "@/lib/data";
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.id === params.slug);
+export default function BlogPost({ params }: { params: { id: string } }) {
+  const post = blogPosts.find((p) => p.id === params.id);
 
   if (!post) {
     notFound();

@@ -1,46 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email, password: password }),
-      });
-
-      console.log("Response:", response);
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("token", data.access_token);
-        router.push("/");
-      } else {
-        console.log("Response status:", response);
-        setError(response.statusText || "Invalid email or password");
-      }
-    } catch (error: any) {
-      console.error("Error logging in:", error);
-      setError(error?.message || "An error occurred. Please try again.");
-    }
-  };
-
+  const [error] = useState("");
+  const { login } = useAuth();
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="space-y-4">
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
@@ -64,9 +36,9 @@ export default function LoginForm() {
         />
       </div>
       {error && <p className="text-red-500 text-sm">{error}</p>}
-      <Button type="submit" className="w-full">
+      <Button onClick={() => login(email, password)} className="w-full">
         Login
       </Button>
-    </form>
+    </div>
   );
 }

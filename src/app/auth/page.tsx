@@ -19,6 +19,7 @@ export default function AuthPage() {
       <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Authentication</CardTitle>
+
           <CardDescription>Login or create a new account</CardDescription>
         </CardHeader>
         <CardContent>
