@@ -1,5 +1,3 @@
-// src/components/Navbar.tsx
-
 "use client";
 
 import Link from "next/link";
@@ -59,6 +57,15 @@ export default function Navbar() {
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+            {isAuthenticated && (
+              <NavigationMenuItem>
+                <Link href="/blogs/create" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Create Post
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            )}
           </NavigationMenuList>
         </NavigationMenu>
         <div className="flex items-center space-x-4">

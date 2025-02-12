@@ -13,6 +13,7 @@ import RegisterForm from "./RegisterForm";
 
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
+  console.log("AuthPage rendered"); // Debugging log
 
   return (
     <div className="container mx-auto flex items-center justify-center min-h-screen">

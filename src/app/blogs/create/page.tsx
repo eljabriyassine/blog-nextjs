@@ -15,11 +15,25 @@ export default function CreateBlogPost() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send this data to your backend API
-    // For now, we'll just log it and redirect
-    console.log({ title, description, content });
-    alert("Blog post created successfully!");
-    router.push("/");
+
+    try {
+      const resposne = await fetch("/api/blogs/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+        body: JSON.stringify({ title, description: content }),
+      });
+
+      if (resposne.ok) {
+        alert("post created succeflly");
+        router.push("/");
+      } else {
+      }
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
   };
 
   return (
