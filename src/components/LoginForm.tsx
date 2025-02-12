@@ -26,11 +26,12 @@ export function LoginForm() {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.access_token);
-        router.push("/dashboard");
+        router.push("/");
       } else {
-        setError("Invalid email or password");
+        const data = await response.json();
+        setError(data.error || "Invalid email or password");
       }
-    } catch {
+    } catch (error) {
       setError("An error occurred. Please try again.");
     }
   };

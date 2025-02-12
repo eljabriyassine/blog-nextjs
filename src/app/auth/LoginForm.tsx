@@ -17,24 +17,25 @@ export default function LoginForm() {
     setError("");
 
     try {
-      const response = await fetch(
-        `${process.env.BACKEND_API_URL}/users/login`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, password: password }),
+      });
+
+      console.log("Response:", response);
 
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.access_token);
         router.push("/");
       } else {
-        setError("Invalid email or password");
+        console.log("Response status:", response);
+        setError(response.statusText || "Invalid email or password");
       }
-    } catch {
-      setError("An error occurred. Please try again.");
+    } catch (error: any) {
+      console.error("Error logging in:", error);
+      setError(error.message || "An error occurred. Please try again.");
     }
   };
 
