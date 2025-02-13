@@ -9,7 +9,6 @@ export async function GET() {
     const data = await response.json();
 
     if (!response.ok) {
-      console.log("Response Error: ", data);
       return NextResponse.json(data, { status: response.status });
     }
 

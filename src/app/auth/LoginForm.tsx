@@ -9,8 +9,7 @@ import { useAuth } from "../context/AuthContext";
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error] = useState("");
-  const { login } = useAuth();
+  const { login, errorLogin } = useAuth();
   return (
     <div className="space-y-4">
       <div className="space-y-2">
@@ -35,7 +34,7 @@ export default function LoginForm() {
           required
         />
       </div>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {errorLogin && <p className="text-red-500 text-sm">{errorLogin}</p>}
       <Button onClick={() => login(email, password)} className="w-full">
         Login
       </Button>

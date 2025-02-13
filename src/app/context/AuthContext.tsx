@@ -14,6 +14,7 @@ interface AuthContextProps {
   isAuthenticated: boolean;
   isAdmin: boolean;
   login: (email: string, password: string) => void;
+  errorLogin: string | null;
   signOut: () => void;
 }
 
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [errorLogin, setErrorLogin] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -50,10 +52,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setIsAdmin(data.user.role === "ADMIN");
         router.push("/");
       } else {
-        throw new Error(response.statusText || "Invalid email or password");
+        setErrorLogin("Invalid email or password. Please try again.");
       }
-    } catch (error: any) {
-      throw new Error(error?.message || "An error occurred. Please try again.");
+    } catch {
+      setErrorLogin("An error occurred. Please try again.");
     }
   };
 
@@ -67,7 +69,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, isAdmin, login, signOut }}
+      value={{ user, isAuthenticated, isAdmin, login, errorLogin, signOut }}
     >
       {children}
     </AuthContext.Provider>

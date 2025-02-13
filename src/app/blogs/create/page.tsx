@@ -12,24 +12,33 @@ export default function CreateBlogPost() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState<File | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("content", content);
+    if (image) {
+      formData.append("image", image);
+    }
+
     try {
-      const resposne = await fetch("/api/blogs/create", {
+      const response = await fetch("/api/blogs/create", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-        body: JSON.stringify({ title, description, content }),
+        body: formData,
       });
 
-      if (resposne.ok) {
-        alert("post created succeflly");
+      if (response.ok) {
+        alert("Post created successfully");
         router.push("/");
       } else {
+        console.error("Error creating post:", await response.text());
       }
     } catch (error) {
       console.error("Error creating post:", error);
@@ -66,6 +75,15 @@ export default function CreateBlogPost() {
             onChange={(e) => setContent(e.target.value)}
             required
             className="h-64"
+          />
+        </div>
+        <div>
+          <Label htmlFor="image">Upload Image</Label>
+          <Input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files?.[0] || null)}
           />
         </div>
         <Button type="submit">Create Post</Button>

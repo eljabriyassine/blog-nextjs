@@ -15,7 +15,6 @@ type Blog = {
 export default async function Home() {
   let blogPosts: Blog[] = [];
 
-  console.log("Fetching blog posts...");
   try {
     const res = await fetch(`${process.env.BACKEND_API_URL}/posts`, {
       cache: "no-store",

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const { title, description, content } = await request.json();
+  const formData = await request.formData();
   const authheader = request.headers.get("authorization");
 
   if (!authheader) {
@@ -15,15 +15,15 @@ export async function POST(request: Request) {
     const response = await fetch(`${process.env.BACKEND_API_URL}/posts`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
         authorization: authheader,
       },
-      body: JSON.stringify({ title, description, content }),
+      body: formData,
     });
 
     const data = await response.json();
 
     if (!response.ok) {
+      console.error("Error creating post:", data);
       return NextResponse.json(data, { status: response.status });
     }
 
