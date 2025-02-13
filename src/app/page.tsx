@@ -18,7 +18,7 @@ export default async function Home() {
   console.log("Fetching blog posts...");
   try {
     const res = await fetch(`${process.env.BACKEND_API_URL}/posts`, {
-      method: "GET",
+      cache: "no-store",
     });
 
     if (res.ok) {
