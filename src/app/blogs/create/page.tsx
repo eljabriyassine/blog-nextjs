@@ -68,6 +68,15 @@ export default function CreateBlogPost() {
           />
         </div>
         <div>
+          <Label htmlFor="image">Upload Image</Label>
+          <Input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files?.[0] || null)}
+          />
+        </div>
+        <div>
           <Label htmlFor="content">Content</Label>
           <Textarea
             id="content"
@@ -77,15 +86,7 @@ export default function CreateBlogPost() {
             className="h-64"
           />
         </div>
-        <div>
-          <Label htmlFor="image">Upload Image</Label>
-          <Input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files?.[0] || null)}
-          />
-        </div>
+
         <Button type="submit">Create Post</Button>
       </form>
     </div>

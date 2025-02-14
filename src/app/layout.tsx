@@ -5,6 +5,7 @@ import type React from "react"; // Added import for React
 import Navbar from "@/components/navbar";
 import ThemeProvider from "@/components/theme-provider";
 import { AuthProvider } from "./context/AuthContext";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Navbar />
-            <main className="container mx-auto px-4 py-8">{children}</main>
+            <main className="container mx-auto w-11/12  py-8">{children}</main>
+            <Footer />
           </ThemeProvider>
         </AuthProvider>
       </body>

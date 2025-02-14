@@ -1,5 +1,3 @@
-// In your Next.js API route (app/api/auth/login/route.ts)
-
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
