@@ -25,13 +25,13 @@ export default function AboutPage() {
             and communities can grow.
           </p>
           <p className="mb-4">
-            Founded in 2025, we've been at the forefront of blogging technology,
-            constantly innovating to meet the evolving needs of our users. We
-            believe in the power of words to inspire, educate, and connect
-            people from all walks of life.
+            Founded in 2025, we&apos;ve been at the forefront of blogging
+            technology, constantly innovating to meet the evolving needs of our
+            users. We believe in the power of words to inspire, educate, and
+            connect people from all walks of life.
           </p>
           <p>
-            Whether you're a seasoned writer or just starting your blogging
+            Whether you&apos;re a seasoned writer or just starting your blogging
             journey, ModernBlog provides the tools and platform you need to make
             your voice heard. Join us in shaping the future of online content
             creation and consumption.
