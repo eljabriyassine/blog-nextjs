@@ -28,7 +28,7 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
           alt={blog.title}
           width={800}
           height={400}
-          className="rounded-t-lg object-cover h-48"
+          className="rounded-lg object-cover h-48"
         />
       </CardHeader>
       <CardContent className="flex-grow">

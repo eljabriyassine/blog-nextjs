@@ -72,7 +72,7 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
                   alt={relatedPost.title}
                   width={400}
                   height={200}
-                  className="rounded-t-lg object-cover h-32"
+                  className="rounded-lg object-cover h-32"
                 />
               </CardHeader>
               <CardContent>
