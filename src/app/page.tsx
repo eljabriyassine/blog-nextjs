@@ -82,7 +82,6 @@ const Home = () => {
           </Link>
         </Button>
       </motion.section>
-
       {/* Featured Post Section */}
       {featuredPost && (
         <motion.section variants={fadeInUp}>
@@ -109,44 +108,20 @@ const Home = () => {
           </div>
         </motion.section>
       )}
-
-      {/* Latest Posts Section */}
-      <motion.section variants={fadeInUp} id="latest-posts">
-        <h2 className="text-4xl font-bold text-center mb-6">Latest Posts</h2>
+      {/* Popular Posts Section */}
+      <motion.section variants={fadeInUp}>
+        <h2 className="text-4xl font-bold text-center mb-6">Popular Posts</h2>
         <motion.div
           variants={stagger}
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-          {blogPosts.map((blog) => (
-            <motion.div
-              key={blog.id}
-              variants={fadeInUp}
-              className="bg-red-400"
-            >
+          {blogPosts.slice(1, 4).map((blog) => (
+            <motion.div key={blog.id} variants={fadeInUp}>
               <BlogCard blog={blog} />
             </motion.div>
           ))}
         </motion.div>
       </motion.section>
-
-      {/* Newsletter Section */}
-      <motion.section
-        variants={fadeInUp}
-        className="bg-gray-100 p-8 rounded-lg text-center"
-      >
-        <h2 className="text-3xl font-bold mb-6">Subscribe to Our Newsletter</h2>
-        <form className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Input
-            type="email"
-            placeholder="Enter your email"
-            className="flex-grow p-3 rounded-lg"
-          />
-          <Button type="submit" className="mt-2 sm:mt-0">
-            Subscribe
-          </Button>
-        </form>
-      </motion.section>
-
       {/* Categories Section */}
       <motion.section variants={fadeInUp}>
         <h2 className="text-4xl font-bold text-center mb-6">Categories</h2>
@@ -168,22 +143,24 @@ const Home = () => {
           ))}
         </div>
       </motion.section>
-
-      {/* Popular Posts Section */}
-      <motion.section variants={fadeInUp}>
-        <h2 className="text-4xl font-bold text-center mb-6">Popular Posts</h2>
+      {/* Latest Posts Section */}
+      <motion.section variants={fadeInUp} id="latest-posts">
+        <h2 className="text-4xl font-bold text-center mb-6">Latest Posts</h2>
         <motion.div
           variants={stagger}
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-          {blogPosts.slice(1, 4).map((blog) => (
-            <motion.div key={blog.id} variants={fadeInUp}>
+          {blogPosts.map((blog) => (
+            <motion.div
+              key={blog.id}
+              variants={fadeInUp}
+              className="bg-red-400"
+            >
               <BlogCard blog={blog} />
             </motion.div>
           ))}
         </motion.div>
       </motion.section>
-
       {/* Team Section */}
       <motion.section variants={fadeInUp}>
         <h2 className="text-4xl font-bold text-center mb-6">Meet the Team</h2>
@@ -207,8 +184,24 @@ const Home = () => {
           ))}
         </div>
       </motion.section>
-
-      {/* Load More Button */}
+      {/* Newsletter Section */}
+      <motion.section
+        variants={fadeInUp}
+        className="bg-gray-100 p-8 rounded-lg text-center"
+      >
+        <h2 className="text-3xl font-bold mb-6">Subscribe to Our Newsletter</h2>
+        <form className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Input
+            type="email"
+            placeholder="Enter your email"
+            className="flex-grow p-3 rounded-lg"
+          />
+          <Button type="submit" className="mt-2 sm:mt-0">
+            Subscribe
+          </Button>
+        </form>
+      </motion.section>
+      s{/* Load More Button */}
       <motion.div variants={fadeInUp} className="text-center">
         <Button variant="outline">Load More</Button>
       </motion.div>
