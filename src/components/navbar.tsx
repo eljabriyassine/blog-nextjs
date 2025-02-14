@@ -18,7 +18,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const { isAuthenticated, signOut } = useAuth();
+  const { isAuthenticated, signOut, user } = useAuth();
 
   // Close dropdown when clicked outside
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function Navbar() {
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
                 className="flex relative w-6 h-6 bg-cyan-400 p-1 justify-center items-center rounded-full text-white cursor-pointer"
               >
-                XY
+                {user?.username?.slice(0, 1) || "U"}
               </div>
 
               {isDropdownOpen && (

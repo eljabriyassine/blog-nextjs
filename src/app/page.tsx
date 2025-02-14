@@ -151,11 +151,7 @@ const Home = () => {
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
           {blogPosts.map((blog) => (
-            <motion.div
-              key={blog.id}
-              variants={fadeInUp}
-              className="bg-red-400"
-            >
+            <motion.div key={blog.id} variants={fadeInUp}>
               <BlogCard blog={blog} />
             </motion.div>
           ))}
