@@ -2,7 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 type Blog = {
   id: number;
   title: string;
@@ -21,7 +27,7 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
   const blogPosts: Blog[] = await resposne.json();
 
   //make three blog in relatedPosts
-  const relatedPosts = blogPosts.slice(0, 3);
+  const relatedPosts = blogPosts.reverse().slice(0, 3);
 
   //take just thre blog from resopse
 
@@ -43,7 +49,7 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
       </div>
 
       <Image
-        src={post.imgUrl || "/placeholder.svg"}
+        src={post.imgUrl || "/images/placeholder.png"}
         alt={post.title}
         width={1200}
         height={600}
@@ -62,24 +68,24 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
             <Card key={relatedPost.id}>
               <CardHeader>
                 <Image
-                  src={relatedPost.imgUrl || "/placeholder.svg"}
+                  src={relatedPost.imgUrl || "/images/placeholder.png"}
                   alt={relatedPost.title}
                   width={400}
                   height={200}
                   className="rounded-t-lg object-cover h-32"
                 />
               </CardHeader>
-              {/* <CardContent>
+              <CardContent>
                 <CardTitle className="mb-2">{relatedPost.title}</CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  {new Date(relatedPost.publishedAt).toLocaleDateString()}
+                  {new Date(relatedPost.createdAt).toLocaleDateString()}
                 </p>
               </CardContent>
               <CardFooter>
                 <Button asChild variant="outline" className="w-full">
-                  <Link href={`/blog/${relatedPost.id}`}>Read More</Link>
+                  <Link href={`/blogs/${relatedPost.id}`}>Read More</Link>
                 </Button>
-              </CardFooter> */}
+              </CardFooter>
             </Card>
           ))}
         </div>

@@ -161,7 +161,11 @@ const Home = () => {
           ))}
         </motion.div>
       </motion.section>
+      <motion.div variants={fadeInUp} className="text-center">
+        <Button variant="outline">Load More</Button>
+      </motion.div>
       {/* Team Section */}
+
       <motion.section variants={fadeInUp}>
         <h2 className="text-4xl font-bold text-center mb-6">Meet the Team</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -201,10 +205,6 @@ const Home = () => {
           </Button>
         </form>
       </motion.section>
-      s{/* Load More Button */}
-      <motion.div variants={fadeInUp} className="text-center">
-        <Button variant="outline">Load More</Button>
-      </motion.div>
     </motion.div>
   );
 };

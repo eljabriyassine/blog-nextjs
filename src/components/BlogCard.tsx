@@ -24,7 +24,7 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
     <Card key={blog.id} className="flex flex-col">
       <CardHeader>
         <Image
-          src={blog.imgUrl || "/placeholder.svg"}
+          src={blog.imgUrl || "/images/placeholder.png"}
           alt={blog.title}
           width={800}
           height={400}
