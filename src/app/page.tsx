@@ -43,8 +43,10 @@ const Home = () => {
 
         if (res.ok) {
           const data = await res.json();
+          console.log(data);
           const posts = Array.isArray(data) ? data : [];
-          setBlogPosts(posts);
+
+          setBlogPosts(posts.reverse());
           setFeaturedPost(posts[0]); // Set the first post as featured
         } else {
           console.error(`Failed to fetch posts. Status: ${res.status}`);
