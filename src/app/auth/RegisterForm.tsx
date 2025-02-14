@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useAuth } from "../context/AuthContext";
 
 interface UserInput {
   value: string;
@@ -23,6 +24,7 @@ interface RegisterFormProps {
 }
 
 export default function RegisterForm({ onRegisterSuccess }: RegisterFormProps) {
+  const { register } = useAuth();
   const [userInputs, setUserInputs] = useState<UserInputs>({
     name: { value: "", error: "" },
     username: { value: "", error: "" },
@@ -90,28 +92,18 @@ export default function RegisterForm({ onRegisterSuccess }: RegisterFormProps) {
       return;
     }
 
-    try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: userInputs.name.value,
-          username: userInputs.username.value,
-          email: userInputs.email.value,
-          password: userInputs.password.value,
-        }),
-      });
+    const registerError = await register(
+      userInputs.name.value,
+      userInputs.username.value,
+      userInputs.email.value,
+      userInputs.password.value
+    );
 
-      if (response.ok) {
-        onRegisterSuccess(); // Switch to login tab
-      } else {
-        const data = await response.json();
-        setGeneralError(
-          data.message || "Registration failed. Please try again."
-        );
-      }
-    } catch {
-      setGeneralError("An error occurred. Please try again.");
+    if (!registerError) {
+      onRegisterSuccess();
+      return;
+    } else {
+      setGeneralError(registerError);
     }
   };
 

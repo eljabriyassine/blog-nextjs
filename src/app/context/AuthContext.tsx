@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useContext,
+} from "react";
 import { useRouter } from "next/navigation";
 
 interface User {
@@ -14,6 +20,12 @@ interface AuthContextProps {
   isAuthenticated: boolean;
   isAdmin: boolean;
   login: (email: string, password: string) => void;
+  register: (
+    name: string,
+    username: string,
+    email: string,
+    password: string
+  ) => Promise<string | null>;
   errorLogin: string | null;
   signOut: () => void;
 }
@@ -59,6 +71,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const register = async (
+    name: string,
+    username: string,
+    email: string,
+    password: string
+  ): Promise<string | null> => {
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, username, email, password }),
+      });
+
+      if (response.ok) {
+        return null;
+      } else {
+        const data = await response.json();
+        return data.message || "Registration failed. Please try again.";
+      }
+    } catch {
+      return "An error occurred. Please try again.";
+    }
+  };
+
   const signOut = () => {
     localStorage.removeItem("access_token");
     setUser(null);
@@ -69,7 +105,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, isAdmin, login, errorLogin, signOut }}
+      value={{
+        user,
+        isAuthenticated,
+        isAdmin,
+        login,
+        register,
+        errorLogin,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>
@@ -77,7 +121,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useAuth = () => {
-  const context = React.useContext(AuthContext);
+  const context = useContext(AuthContext);
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
